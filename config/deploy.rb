@@ -1,8 +1,6 @@
-require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'    # for rvm support. (https://rvm.io)
-require 'mina/puma'
-require 'mina/nginx'
+require 'mina/rails'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -12,19 +10,20 @@ require 'mina/nginx'
 
 set :application_name, 'flosscoach'
 set :application, fetch(:application_name)
-set :domain, 'flosscoach.com'
 set :user, fetch(:application_name)
-set :deploy_to, "/home/#{fetch(:user)}/app"
-set :repository, 'https://gitlab.com/flosscoach/flosscoach.git'
-set :branch, 'master'
 set :rvm_use_path, '/home/flosscoach/.rvm/scripts/rvm'
-set :nginx_socket_path, '/home/flosscoach/app/shared/tmp/sockets/puma.sock'
 set :current_path, '/home/flosscoach/app/current'
 
+set :domain, 'flosscoach.com'
+set :repository, 'https://gitlab.com/flosscoach/flosscoach.git'
+set :branch, 'master'
+set :deploy_to, "/home/#{fetch(:user)}/app"
+
+
 # Optional settings:
-set :user, 'flosscoach'          # Username in the server to SSH to.
-set :port, '22'           # SSH port number.
-set :forward_agent, true     # SSH forward_agent.
+#set :user, 'flosscoach'          # Username in the server to SSH to.
+#set :port, '22'           # SSH port number.
+#set :forward_agent, true     # SSH forward_agent.
 
 # Shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 # Some plugins already add folders to shared_dirs like `mina/rails` add `public/assets`, `vendor/bundle` and many more
@@ -62,14 +61,6 @@ task :deploy do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-
-    on :launch do
-      in_path(fetch(:current_path)) do
-        command %{mkdir -p tmp/}
-        command %{touch tmp/restart.txt}
-        invoke :'puma:phased_restart'
-      end
-    end
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
