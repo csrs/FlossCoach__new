@@ -3,7 +3,7 @@ gem 'rails', '~> 5.0.0'
 gem 'savon'
 gem 'activeresource', github: 'rails/activeresource', branch: 'master'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.6'
 #Login Authorization
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'

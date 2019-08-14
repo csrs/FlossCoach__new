@@ -2,134 +2,67 @@
 FLOSScoach is built as an academic effort to provide better organization to support newcomers.
 We appreciate any community support, helping us with the following steps, interesting ideas,
 bug fixing, document improvement. In summary, there are many ways you can support our community.
-These are some of the options if you want to support us:
+First, if you found something or had an idea:
 - [File an issue (bug report or new feature request)](#file-an-issue)
+
+If you want to fix something already reported. You may first [find an issues to work with](#find-an-issue). You may find tasks related to:
+- [Work on GitLab documentation](#work-on-documentation)
 - [Help us coding: adding features or fixing bugs](#help-us-with-code)
 
-
-# File an issue
+## File an issue
 - Did you find any problem while using FLOSScoach?
 - Do you have any great idea of new feature that would make FLOSScoach nicer? 
 
 Don't keep it to yourself. Please let us know! Reporting issues and providing feature requests are one of the things that makes Open Source amazing. 
 Please help us by creating a new issue report in our GitLab repository (either bug report or feature request). 
 
-To do so, go to the list of issues in our GitLab page, create a ``New Issue'' and provide as much details as you can in your report. 
+To do so:
+1. go to the [issue list](https://gitlab.com/mariamgui/flosscoach-ia/issues) in our GitLab page 
+2. create a "New Issue" (Green button in the top left) and 
+3. provide as much details as you can in your report. 
+
 Remember to stay tuned in your issue to provide more details as requested by other members in the follow up comments.
 
+## Find an issue
+If you want to contribute fixing something that has already been reported, you should:
 
-# Help us with code
+1. Take a look in our [issue list](https://gitlab.com/mariamgui/flosscoach-ia/issues)
+2. Look for labels to guide you (bug, documentation, good for newcomers, etc.)
+3. Find something that fits your goals or is appropriate for you
+4. Ask for more details or inform the commuinity that you are interested in working with the issue (as a comment)
 
-Hi! if you're willing to contribute with code to  **FLOSScoach** these are the simple setps you must follow to get your local machine ready for development. Tough easy and simple, these steps are estimated to take up to 30min.
-
-## Step 0 - OS
-We're focusing here on the Linux operational system (Ubuntu, Mint and other distributions) . Steps may vary in case of MacOS or Windows. 
-
-## Step 1- Rails Dependencies dependencies 
-There are some core dependencies that must be installed for the framework *Ruby on Rails* in which *FLOSScoach* is built on top of.
-
-### 1.1 Adding Node.js and Yarn repositories
-Running the following command will add NOde.js and Yarn repositories to your machine:
-```bash
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-sudo apt-get update
-sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
-```
-
-### 1.2 Installing Ruby through rbenv
-rbenv (Ruby virtual environment) is a good, stable and simple way of installing the Ruby programming language interpreter. Here's how to do it:
-'''
-```bash
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-exec $SHELL
-
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-exec $SHELL
-
-rbenv install 2.3
-rbenv global 2.3
-ruby -v
-```
-Please note that we're installing Ruby version 2.3 
-
-### 1.3 - Installing Bundler 
-Bundler is the last dependencie. SImply execute a
-```bash
-gem install bundler
-```
-and it's all done.
-
-## Step 2- Configuring Git
-
-Version control is quintessential while contributing to open source projects and working with code in general. Here's how to set your *Git* configurations:
-```bash
-git config --global color.ui true
-git config --global user.name "Insert your name here"
-git config --global user.email "yourEmailAdress@here.com"
-```
-You might want to use the same email as the one used for yout Github/lab account.
-
-## Step 3 - Installing Node.js and Rails
-```bash
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
-```bash
-gem install rails -v 5.2.1
-```
+## Work on documentation 
+Another nice and easy way to start contributing to the project is by fixing issues or adding information to our documentation. 
+To do so, you just need to 
+1. navigate to the desired file (in this project they are usually markdown -- .md -- files); 
+2. edit in the GitLab editor (clicking the "Edit" button in the top-left corner of the file content);
+    - You will probably be requested to create a fork. Go ahead and do that (want to learn more about forks? It is a copy of the repository to your account. More? [Click here](https://docs.gitlab.com/ee/gitlab-basics/fork-project.html#how-to-fork-a-project))
+3. edit the file and submit your merge request following the GitLab workflow (want to know more about the merge request workflow? [Click here](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html)
+4. your changes will be reviewed before going to production (and some changes may be required later)
 
 
+## Help us with code
 
-## Step 4 - Database: Setting up Sqlite3 and Postgre SQL
-Installing Postgre SQL can be done with the following commands:
-```bash
-sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
-wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install postgresql-common
-sudo apt-get install postgresql-9.5 libpq-dev
-```
-Lastly, you need to set an user and password so then *FLOSScoach* database setup will be albe to explore and modify the development database
-```bash
-# python is the username in the development set up.
-sudo -u postgres createuser python -s
-```
-It's important to jnow that the default development password is **python** and you must set it just like this
-```bash
-# Setting password for the user named python:
-sudo -u postgres psql
-\password python
-# And you will be prompted to type the new password
-```
-In case you want different user/passoword just be sure to match these with 
-the present in the *config/database.yml* file 
+Hi! if you're willing to contribute with code to  **FLOSScoach**, 
+in addition to [find a task to contribute to](#find-an-issue), you will need to
+**set up the project workspace on your local machine**, so you can make the appropriate
+changes to the codebase.
 
-## Step 5 - Cloning the FLOSScoach repository
-Now that everything is ready, it's time to clone the repository of the project to run your local development server and start contributing
-```bash
-cd ~
-# Cloning the development branchcan be done like so: git clone -b <branch> <remote_repo>
-git clone -b development https://gitlab.com/flosscoach/flosscoach.git
-#Navigate to the newly created repository clone:
-cd flosscoach
-```
-Some final small adjustments:
-```bash
-rake db:migrate RAILS_ENV=development
-rails server -p 8000
-```
-Finally done!! See your local server running on [localhost:8000](http://localhost:8000)
+We provide a simple set of steps you must follow to get your local machine ready for development. 
+Choose your Operating System:
 
-## Step 6 - Merging your contributions
-After you have finished writting some code these are the steps for adding your contribution to FLOSScoach:
+- [Linux](workspace_setup_linux.md)
+- [Mac](workspace_setup_mac.md)
+- Windows -- Not available (Want to help us? Fix the [issue 149](https://gitlab.com/mariamgui/flosscoach-ia/issues/149), creating a step-by-step for setting up FLOSScoach in a Windows box)
 
-### Step 6.1 - Add changes to GitLab
+**Though easy and simple, these steps are estimated to take up to 30min.**
+
+After that, hands on! Make your changes locally...
+
+### Submitting your changes
+After you have finished writting some code, or changings so these are the steps for adding your contribution to FLOSScoach:
+
+#### Add changes to git
 ```bash
 #cd to the project directory
 cd flossccoach
@@ -141,8 +74,8 @@ git commit -m "Insert commit message here"
 git push origin development
 #You will be prompted to insert your Gitlab login credentials then
 ```
-### Step 6.2 Merging changes
-To merge the changes you've done on development to master branch you can follow the excelent instructions from [Gitlab official docs](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html).
+### Merging changes
+To merge the changes you've done to the master branch of FLOSScoach project you can follow the excelent instructions 
+from [Gitlab official docs](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html).
 It's quite simple to be done.
-
 
